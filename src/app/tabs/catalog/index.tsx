@@ -1,13 +1,12 @@
-import { router, useFocusEffect } from "expo-router";
 import { FlatList, ListRenderItem } from 'react-native';
 import * as S from './style';
 import Product from "@/components/Product";
-import { ComicsPros, getMarvelComics } from "@/src/services/api";
+import { getMarvelComics } from "@/services/comics";
+import { ComicsPros } from '@/services/types';
 import { useEffect, useState } from "react";
 import Loading from "@/components/Loading";
 
 export default function Index() {
-
   const [comics, setComics ] = useState([] as ComicsPros[]);
   const [loading, setLoading] = useState<boolean>(true);
   const [currentPage, setCurrentPage] = useState<number>(0);
@@ -18,7 +17,7 @@ export default function Index() {
       const newComics = await getMarvelComics(10, (page*10));
       setComics([...comics, ...newComics]);
     } catch (error) {
-      alert('Eroo na busca por comics, por favor tente de novo mais tarde.');
+      alert('Erro na busca por comics, por favor tente de novo mais tarde.');
       throw error; 
     }finally{
       setLoading(false);
@@ -45,6 +44,8 @@ export default function Index() {
       id={item.id}
       image={`${item.thumbnail.path}.${item.thumbnail.extension}`}
       title={item.title}
+      amount={1}
+      price={item.prices[0].price == 0 ? 5.9 : item.prices[0].price}
     />
   );
 

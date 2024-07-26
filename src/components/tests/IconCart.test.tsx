@@ -1,20 +1,23 @@
 import React from 'react';
 import { render, fireEvent, waitFor  } from '@testing-library/react-native';
-import { useNavigation } from '@react-navigation/native';
+import { useRouter } from 'expo-router';
 import IconCart from '@/components/IconCart';
-import { useCartStore } from '@/src/store/cartStore';
+import { useCartStore } from '@/store/cartStore';
 
-jest.mock('@react-navigation/native', () => ({
-    useNavigation: jest.fn(),
-  }));
-
+jest.mock('expo-router', () => ({
+    useRouter: jest.fn(() => ({
+        push: jest.fn(),
+    })),
+}));
 
 describe('IconCart', () => {
     beforeEach(() => {
         const cart = [{ 
             id: 1, 
             title: 'Product 1', 
-            image: 'http: //i.annihil.us/u/prod/marvel/i/mg/b/40/image_not_available.jpg'
+            image: 'http: //i.annihil.us/u/prod/marvel/i/mg/b/40/image_not_available.jpg',
+            price: 10,
+            amount: 1
          }];
         useCartStore.setState({ cart });
       });
@@ -24,13 +27,13 @@ describe('IconCart', () => {
     });
     
     it('navigates to cart screen on press', async () => {
-        const navigate = jest.fn();
-        (useNavigation as jest.Mock).mockReturnValue({ navigate });
+        const push = jest.fn();
+        (useRouter as jest.Mock).mockReturnValue({ push });
     
         const { getByTestId } = render(<IconCart />);
         const button = getByTestId('cart-icon-button');
         fireEvent.press(button);
     
-        await waitFor(() => expect(navigate).toHaveBeenCalledWith('Cart/index'));
+        await waitFor(() => expect(push).toHaveBeenCalledWith('/cart'));
     });
 });

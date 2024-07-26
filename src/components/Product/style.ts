@@ -36,3 +36,10 @@ export const ButtonText = styled.Text`
   color: white;
 `;
 
+export const FavoriteButton = styled(TouchableOpacity)`
+  position: absolute;
+  right: 0;
+  top: 100px;
+  padding: 10px;
+  border-radius: 5px;
+`;

@@ -19,7 +19,7 @@ Foi desenvolvida uma comunicação com a API da marvel para alimentar a listagem
    ```
 
 ## Prints da aplicação 
-![Loading](./Loadding.png) ![Listagem de produtos](./ListagemDeProdutos.png) ![Listagem com produtos add](./ListagemComProdutosAdd.png) ![Carrinho](./Carrinho.png)
+![Loading](./Loadding.png) ![Listagem de produtos](./ListagemDeProdutos.png) ![Listagem com produtos add](./ListagemComProdutosAdd.png) ![Carrinho](./Carrinho.png) ![Favoritos](./Favoritos.png)
 
 ## Componentes
 Foram desenvolvidos 3 componentes para a realização do teste

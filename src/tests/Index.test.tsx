@@ -1,10 +1,10 @@
 import React from 'react';
-import { render, fireEvent, waitFor, act } from '@testing-library/react-native';
-import Index from '@/app/index';
-import * as api from '@/src/services/api';
-import { ComicsPros } from '@/src/services/api';
+import { render, waitFor } from '@testing-library/react-native';
+import Index from '@/app/tabs/catalog/index';
+import * as api from '@/services/comics';
+import { ComicsPros } from '@/services/types';
 
-jest.mock('@/src/services/api');
+jest.mock('@/services/comics');
 
 const mockedComics: ComicsPros[] = [
   {
@@ -14,6 +14,10 @@ const mockedComics: ComicsPros[] = [
       path: "http://path/to/image",
       extension: "jpg",
     },
+    prices:[{
+      price: 29.90,
+      type: "digital"
+    }]
   },
   {
     id: 2,
@@ -22,6 +26,10 @@ const mockedComics: ComicsPros[] = [
       path: "http://path/to/image",
       extension: "jpg",
     },
+    prices:[{
+      price: 19.90,
+      type: "digital"
+    }]
   },
 ];
 
@@ -31,7 +39,7 @@ describe('Index', () => {
   });
 
   it('renders initial comics and renders the first call to api', async () => {
-    const { getByText, getByTestId } = render(<Index />);
+    const { getByText } = render(<Index />);
 
     await waitFor(() => {
     expect(getByText('Comic 1')).toBeTruthy();

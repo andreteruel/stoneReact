@@ -29,22 +29,16 @@ export const Title = styled.Text`
 `;
 
 export const RemoveButton = styled(TouchableOpacity)`
-  background-color: #ff6347;
   padding: 10px;
   border-radius: 5px;
 `;
 
-export const ButtonText = styled.Text`
-  color: white;
-`;
-
-
 export const EmptyContainer = styled.View`
   flex: 1;
-  justifyContent: 'center';
-  alignItems: 'center';
+  justifyContent: center;
+  align-items: center;
 `;
 
 export const EmptyText = styled.Text`
-  fontSize: 18,
+  fontSize: 18px;
 `;

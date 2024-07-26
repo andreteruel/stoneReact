@@ -1,16 +1,16 @@
 
-import { useCartStore } from '@/src/store/cartStore';
-import { NavigationProp, useNavigation } from '@react-navigation/native';
+import { useCartStore } from '@/store/cartStore';
 import Ionicons from 'react-native-vector-icons/Ionicons';
 import * as S from './style'
 import { TouchableOpacity } from 'react-native';
+import { useRouter } from 'expo-router';
 
 const IconCart: React.FC = () => {
-    const navigation = useNavigation<NavigationProp<any>>();
     const cart = useCartStore((state) => state.cart);
+    const router = useRouter(); 
 
     return (
-        <TouchableOpacity onPress={() => navigation.navigate('Cart/index')} testID="cart-icon-button">
+        <TouchableOpacity onPress={() => router.push('/cart')} testID="cart-icon-button">
             <S.Container>
                 <Ionicons
                     name="cart-outline"
